@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+
+	<style type="text/css">
+		body {
+  font-family: sans-serif;
+}
+
+#traffic-light1 {
+  height: 55px;
+  width: 140px;
+  float: left;
+  background-color: #333;
+  border-radius: 35px;
+/*  margin: 30px 0;
+*/  padding: 10px;
+}
+
+.bulb1 {
+  height: 25px;
+  width: 25px;
+  background-color: #111;
+  border-radius: 50%;
+  margin: 5px auto;
+  transition: background 500ms;
+}
+	</style>
+	<title></title>
+</head>
+<body>
+
+<div id="traffic-light">
+  <div class="row">
+    <div class="col-md-4">
+      <div id="stopLight" class="bulb1"></div>
+    </div>
+    <div class="col-md-4">
+      <div id="slowLight" class="bulb1"></div>
+    </div>
+    <div class="col-md-4">
+      <div id="goLight" class="bulb1"></div>
+    </div>
+  </div>
+<!--   <div id="stopLight" class="bulb"></div><div id="slowLight" class="bulb"></div><div id="goLight" class="bulb"></div>
+ --><!--   <div id="slowLight" class="bulb"></div>
+  <div id="goLight" class="bulb"></div> -->
+
+</div>
+<script>
+function illuminateRed() {
+  clearLights();
+  document.getElementById('stopLight').style.backgroundColor = "red";
+}
+
+function illuminateYellow() {
+  clearLights();
+  document.getElementById('slowLight').style.backgroundColor = "yellow";
+}
+function illuminateGreen() {
+  clearLights();
+  document.getElementById('goLight').style.backgroundColor = "green";
+}
+
+function clearLights() {
+  document.getElementById('stopLight').style.backgroundColor = "black";
+  document.getElementById('slowLight').style.backgroundColor = "black";
+  document.getElementById('goLight').style.backgroundColor = "black";
+}
+function change(light) {
+	if(light==1){
+		illuminateRed();
+	}
+	else if(light==2){
+		illuminateYellow();
+	}
+	else if(light==3){
+		illuminateGreen();
+	}
+}
+change(1);
+</script>
+</body>
+</html>

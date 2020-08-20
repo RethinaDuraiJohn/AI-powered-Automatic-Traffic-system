@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+<style>
+* {
+  box-sizing: border-box;
+}
+
+
+.column {
+  float: left;
+  width: 33.33%;
+  padding: 5px;
+}
+
+/* Clearfix (clear floats) */
+.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+.container {
+         margin-top:5px;
+         margin-left:250px;
+         }
+</style>
+</head>
+<body>
+
+<h2 align= "center">Recorded Frames</h2>
+<div class ="container" align = "center">
+<div class="row" >
+  <div class="column">
+    <img src="{{url_for('img_statt', filename='final1.jpg')}}" style="width:100%">
+    <img src="{{url_for('img_statt', filename='final2.jpg')}}" style="width:100%">
+  </div>
+  <div class="column">
+    <img src="{{url_for('img_statt', filename='final3.jpg')}}" style="width:100%">
+    <img src="{{url_for('img_statt', filename='final4.jpg')}}" style="width:100%">
+  </div>
+</div>
+</div>
+
+</body>
+</html>

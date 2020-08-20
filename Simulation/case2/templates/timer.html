@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+</head>
+<body>
+<div style="  width: 50px;   padding:10px;   border: 5px solid black;  margin: 0;">
+ <font size="20" face="Trebuchet MS" id="t1"></font>
+</div>
+<script type="text/javascript">
+
+var total_seconds = 0 , g = 0;
+function CheckTime( total_seconds){
+  var s = total_seconds;
+  console.log(s);
+  if(s<10)
+  {
+  	  document.getElementById("t1").innerHTML = '0' + total_seconds;
+
+  }
+  else{
+  	  document.getElementById("t1").innerHTML = total_seconds;
+
+  }
+  if(s<=0){
+    document.getElementById("t1").innerHTML = "--";
+  }else{
+    s = s - 1;
+    g = parseInt(s);
+    console.log(s);
+	setTimeout("CheckTime(g)",1000);
+  }
+      }
+
+
+CheckTime(10);
+</script>
+
+</body>
+</html>

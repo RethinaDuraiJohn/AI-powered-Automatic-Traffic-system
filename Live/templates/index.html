@@ -1,0 +1,276 @@
+<!DOCTYPE HTML>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+		integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+	<link rel="stylesheet" href="{{url_for('css_static', filename='style.css')}}">
+</head>
+
+<style type="text/css">
+	line {
+		stroke: white;
+		stroke-width: 6
+	}
+</style>
+
+<body>
+
+	<div class="container-fluid">
+		<!-- <h1 class="text-center">Traffic Signal Management</h1> -->
+		<br>
+		<div class="row" id="d1">
+			<div class="col-sm-3">
+				<div class="row">
+					<div class="col-sm-10">
+						<div id="one1">
+							<form id="uploadform1" class="hideme" method="post" enctype="multipart/form-data">
+								<div class="form-group">
+									<div class="col">
+										<input type="file" accept="video/mp4,video/x-m4v,video/*"
+											class="form-control-file	" name="file">
+										<br>
+										<button id="submit1" type="button" class="btn btn-primary">Upload</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<br><br><br><br>
+						<div id="time1" style="  width: 70px;   padding:5px;   border: 5px solid green;  margin: 0;">
+							<font size="20" color="green" face="Trebuchet MS" id="t1"></font>
+						</div>
+					</div>
+				</div>
+			</div>
+
+			<script>
+			</script>
+
+			<div id="hi" class="col-sm-1.2">
+				<div class="light" style="background-color: red;" id="r1"></div>
+				<div class="spacer"></div>
+				<div class="light" style="background-color: #e6e600;" id="y1"></div>
+				<div c lass="spacer"></div>
+				<div class="light" style="background-color: #27e833;" id="g1"></div>
+			</div>
+
+			<div class="row">
+				<svg width="300" height="260">
+					<rect width="300" height="260" style="fill:rgb(0,0,0);stroke-width:10;stroke:rgb(0,0,0)" />
+					<line stroke-dasharray="15, 15" x1="150" y1="300" x2="150" y2="1" style="stroke-width: 6px;"></line>
+				</svg>
+			</div>
+
+			<div id="hi" class="col-sm-1.2">
+				<div class="light" style="background-color: red;" id="r2"></div>
+				<div class="spacer"></div>
+				<div class="light" style="background-color: #e6e600;" id="y2"></div>
+				<div class="spacer"></div>
+				<div class="light" style="background-color: #27e833;" id="g2"></div>
+			</div>
+
+
+			<div class="col-sm-3">
+				<div class="row">
+					<div class="col-sm-2">
+						<br><br><br><br>
+						<div id="time2" style="  width: 70px;   padding:5px;   border: 5px solid green;  margin: 0;">
+							<font size="20" color="green" face="Trebuchet MS" id="t2"></font>
+						</div>
+					</div>
+					<div class="col-sm-10">
+						<div id="one2">
+							<form id="uploadform2" class="hideme" method="post" enctype="multipart/form-data">
+								<div class="form-group">
+									<div class="col">
+										<input type="file" accept="video/mp4,video/x-m4v,video/*"
+											class="form-control-file	" name="file">
+										<br>
+										<button id="submit2" type="button" class="btn btn-primary">Upload</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+
+				</div>
+
+
+			</div>
+		</div>
+
+		<div class="row">
+			<div class="col-sm-5">
+				<svg width="815" height="250">
+					<rect width="1940" height="250" style="fill:rgb(0,0,0);stroke-width:3;stroke:rgb(0,0,0)" />
+					<g fill="none" stroke="white" stroke-width="6">
+						<path stroke-dasharray="20,20" d="M5 120 l1940 0" />
+					</g>
+				</svg>
+			</div>
+
+			<div class="col-sm-2">
+				<svg width="340" height="250">
+					<rect width="1940" height="250" style="fill:rgb(0,0,0);stroke-width:3;stroke:rgb(0,0,0)" />
+				</svg>
+			</div>
+
+			<div class="col-sm-5">
+				<svg width="779" height="250">
+					<rect width="779" height="250" style="fill:rgb(0,0,0);stroke-width:3;stroke:rgb(0,0,0)" />
+					<g fill="none" stroke="white" stroke-width="6">
+						<path stroke-dasharray="20,20" d="M5 120 l1940 0" />
+					</g>
+				</svg>
+			</div>
+
+
+
+
+
+
+		</div>
+
+		<div class="row" id="d2">
+			<div class="col-sm-3">
+				<br>
+				<div class="row">
+					<div class="col-sm-10">
+						<div id="one3">
+							<form id="uploadform3" class="hideme" method="post" enctype="multipart/form-data">
+								<div class="form-group">
+									<div class="col">
+										<input type="file" accept="video/mp4,video/x-m4v,video/*"
+											class="form-control-file	" name="file">
+										<br>
+										<button id="submit3" type="button" class="btn btn-primary">Upload</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+					<div class="col-sm-2">
+						<br><br><br><br>
+						<div id="time3" style="  width: 70px;   padding:5px;   border: 5px solid green;  margin: 0;">
+							<font size="20" color="green" face="Trebuchet MS" id="t3"></font>
+						</div>
+					</div>
+				</div>
+
+
+			</div>
+
+
+
+			<div id="hi" class="col-sm-1.2">
+				<div class="light" style="background-color: red;" id="r3"></div>
+				<div class="spacer"></div>
+				<div class="light" style="background-color: #e6e600;" id="y3"></div>
+				<div class="spacer"></div>
+				<div class="light" style="background-color: #27e833;" id="g3"></div>
+			</div>
+
+			<div class="row-sm-4">
+				<svg width="300" height="260">
+					<rect width="300" height="260" style="fill:rgb(0,0,0);stroke-width:10;stroke:rgb(0,0,0)" />
+					<line stroke-dasharray="15, 15" x1="150" y1="300" x2="150" y2="1" style="stroke-width: 6px;"></line>
+				</svg>
+			</div>
+
+			<div id="hi" class="col-sm-1.2">
+				<div class="light" style="background-color: red;" id="r4"></div>
+				<div class="spacer"></div>
+				<div class="light" style="background-color: #e6e600;" id="y4"></div>
+				<div class="spacer"></div>
+				<div class="light" style="background-color: #27e833;" id="g4"></div>
+			</div>
+
+			<div class="col-sm-3">
+				<br>
+
+				<div class="row">
+					<div class="col-sm-2">
+						<br><br><br><br>
+						<div id="time4" style="  width: 70px;   padding:5px;   border: 5px solid green;  margin: 0;">
+							<font size="20" color="green" face="Trebuchet MS" id="t4"></font>
+						</div>
+					</div>
+					<div class="col-sm-10">
+						<div id="one4">
+							<form id="uploadform4" class="hideme" method="post" enctype="multipart/form-data">
+								<div class="form-group">
+									<div class="col">
+										<input type="file" accept="video/mp4,video/x-m4v,video/*"
+											class="form-control-file	" name="file">
+										<br>
+										<button id="submit4" type="button" class="btn btn-primary">Upload</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</div>
+
+				</div>
+			</div>
+
+
+
+		</div>
+
+		<br>
+		<div class="row">
+			<div class="col-sm-5">
+			</div>
+			<div class="col-sm-2" align="center" id>
+				<button id="submit5" type="button" class="button btn-primary">Update The Signal</button>
+			</div>
+			<div class="col-sm-5"></div>
+		</div>
+
+		<div class="row" id="ans">
+			<div class="col-sm-4"></div>
+			<div class="col-sm-4">
+				<br><br>
+				<table class="table" id="reso">
+					<thead class="thead-dark" >
+						<tr>
+							<th>#</th>
+							<th>Light Vechicles</th>
+							<th>Medium Vechicles</th>
+							<th>Heavey Vechicles</th>
+						</tr>
+					</thead>
+					<tbody id="delme"></tbody>
+						
+					</tbody>
+				</table>
+			</div>
+			<div class="col-sm-4"></div>
+
+
+		</div>
+	</div>
+
+
+
+	</div>
+
+
+
+	<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+	<script src="{{url_for('js_static', filename='app.js')}}"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"
+		integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1"
+		crossorigin="anonymous"></script>
+	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+		integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM"
+		crossorigin="anonymous"></script>
+</body>
+
+</html>

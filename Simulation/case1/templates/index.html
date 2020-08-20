@@ -1,0 +1,812 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<script type=text/javascript src="{{ url_for('static', filename='jquery.js') }}"></script>
+<meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
+<script type=text/javascript>
+  $SCRIPT_ROOT = {{ request.script_root|tojson|safe }};
+</script>
+
+
+<style>
+    body {
+  font-family: sans-serif;
+}
+line {stroke:white; stroke-width: 6}
+
+#traffic-light1 {
+  height: 60px;
+  width: 170px;
+  float: left;
+  background-color: #333;
+  border-radius: 35px;
+  padding: 10px;
+}
+#traffic-light2 {
+  height: 150px;
+  width: 70px;
+  background-color: #333;
+  border-radius: 35px;
+  margin: 7px 0;
+  padding: 20px;
+}
+#traffic-light3 {
+  height: 60px;
+  width: 170px;
+  float: left;
+  margin: 7px 0;
+  background-color: #333;
+  border-radius: 35px;
+  padding: 10px;
+}
+#traffic-light4 {
+  height: 150px;
+  width: 70px;
+  background-color: #333;
+  border-radius: 35px;
+  margin: 7px 0;
+  padding: 20px;
+}
+.bulb1 {
+  height: 33px;
+  width: 33px;
+  background-color: #111;
+  border-radius: 50%;
+  margin: 3px auto;
+  transition: background 500ms;
+}
+.dot {
+    height: 10px;
+    width: 10px;
+    position: absolute;
+    border-radius: 50%;
+    fill:white;
+    border: 2px solid white;
+    background: white;
+    z-index: 10;
+}
+
+a {
+    color: white;
+}
+.bulb {
+  height: 30px;
+  width: 30px;
+  background-color: #111;
+  border-radius: 50%;
+  margin: 7px auto;
+  transition: background 500ms;
+}
+    * {
+  box-sizing: border-box;
+}
+
+/* Create four equal columns that floats next to each other */
+.column {
+  float: left;
+  width: 25%;
+  padding: 10px;
+  height: 300px; /* Should be removed. Only for demonstration */
+}
+
+/* Clear floats after the columns */
+.row:after {
+  content: "";
+  display: table;
+  clear: both;
+}
+  </style>
+<script src="{{ url_for('static', filename='js.js') }}"></script>
+
+</head>
+<body>
+  <div class="container-fluid">
+<div class="jumbotron jumbotron-fluid" style="background-color: #072F5F; height: 172px ;border: 6px solid black">
+  
+    <!-- <center><font size="7" color="white" >GOD'S EYE</font></center> -->
+    <center><h1 style="color:white ;font-size: 50px;" >GOD'S EYE</h1></center>
+    <p><br></p>
+          
+</div>
+</div>
+<!-- <p><br></p>
+ --><div class="container-fluid">
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-2">
+            <p><input type=text class="form-control" size=5 placeholder="light weighted" name=a1></p>
+            <p><input type=text class="form-control" size=5 placeholder="medium weighted"name=a2></p>
+            <p><input type=text class="form-control" size=5 placeholder="heavy weighted"name=a3></p>
+      <span id=result>?</span>
+      <div id="time1" style="  width: 70px; padding:5px;   border: 5px solid green;  margin: 0;">
+ <font size="20" color="green" face="Trebuchet MS" id="t1"></font>
+</div>
+<script type="text/javascript">
+
+var total_seconds1 = 0 , g1 = 0;
+function CheckTime1( total_seconds1){
+  var s1 = total_seconds1;
+  console.log(s1);
+  if(s1<10)
+  {
+      document.getElementById("t1").innerHTML = '0' + total_seconds1;
+
+  }
+  else{
+      document.getElementById("t1").innerHTML = total_seconds1;
+
+  }
+  if(s1<=0){
+    document.getElementById("t1").innerHTML = "--";
+  }
+  else{
+    s1 = s1 - 1;
+    g1 = parseInt(s1);
+    console.log(s1);
+  setTimeout("CheckTime1(g1)",1000);
+  }
+      }
+
+
+//CheckTime1(10);
+</script>
+</div>
+    <div class="col-md-2">
+      <p></p>
+      <p><br><br><br><br><br></p>
+        <div id="traffic-light1">
+<div class="row">
+    <div class="col-md-4">
+      <div id="goLight1" class="bulb1"></div>
+    </div>
+    <div class="col-md-4">
+      <div id="slowLight1" class="bulb1"></div>
+    </div>
+    <div class="col-md-4">
+      
+      <div id="stopLight1" class="bulb1"></div>
+    </div>
+  </div>
+
+</div>
+<script>
+function illuminateRed1() {
+  clearLights1();
+  document.getElementById('stopLight1').style.backgroundColor = "red";
+}
+
+function illuminateYellow1() {
+  clearLights1();
+  document.getElementById('slowLight1').style.backgroundColor = "yellow";
+}
+function illuminateGreen1() {
+  clearLights1();
+  document.getElementById('goLight1').style.backgroundColor = "green";
+}
+
+function clearLights1() {
+  document.getElementById('stopLight1').style.backgroundColor = "black";
+  document.getElementById('slowLight1').style.backgroundColor = "black";
+  document.getElementById('goLight1').style.backgroundColor = "black";
+}
+function change1(light1) {
+  if(light1==1){
+    illuminateRed1();
+  }
+  else if(light1==2){
+    illuminateYellow1();
+  }
+  else if(light1==3){
+    illuminateGreen1();
+  }
+}
+ //change1(3);
+</script>
+    </div>
+    <div class="col-md-2">
+     <svg width="150" height="280">
+  <rect width="150" height="280" style="fill:rgb(0,0,0);stroke-width:3;stroke:rgb(0,0,0)" />
+          <line stroke-dasharray="15, 15" x1="73" y1="280" x2="73" y2="1" style="stroke-width: 6px;"></line>
+           <foreignobject class="node"  width="150" height="280">
+                       <div style='position:relative' id='wrapper2'></div>
+           </foreignobject>
+      </svg>
+<script type="text/javascript">
+  //var def = 50;
+  function def2(def){
+    var xmin=80; 
+    var xmax=150;
+    var ymin=0; 
+    var ymax=225;
+    var pointsX = [];
+    var pointsY = [];
+    var str = 'gid=4';
+    for(var i = 0;i<def ;i++)
+    {
+      var xrandom = Math.random() * (+xmax - +xmin) + +xmin;
+      var yrandom = Math.random() * (+ymax - +ymin) + +ymin;
+      str = str +'&'+'x='+ xrandom.toString()+'y='+ yrandom.toString();
+    }
+     // var str = 'gid=4&x=20y=30&x=40y=50&x=100y=100&x=200y=200&x=300y=300&x=240y=240';
+    var data = str.match(/(x|y)=(\d+)/g), pointsX = [], pointsY = [];
+    for(var i = 0; i < data.length; i++)
+    {
+        var tmp = data[i].split('=');
+        if (tmp[0] == 'x')
+            pointsX.push(tmp[1]);
+        else
+            pointsY.push(tmp[1]);
+    }
+    for(var i = 0; i < pointsX.length; i++)
+    {
+        var div = document.createElement('div');
+        div.className = 'dot';
+        div.style.left = pointsX[i] + 'px';
+        div.style.top = pointsY[i] + 'px';
+        document.getElementById('wrapper2').appendChild(div);
+    }    
+  }
+
+  //def2(5);
+  var imageOffset2 = 0;
+  function moved()
+  {
+    if(imageOffset2<=550){
+  imageOffset2 += 1
+  document.getElementById("wrapper2").style.top = imageOffset2 + "px";
+  animate2 = setTimeout(function(){moved();},50);
+}
+
+else
+{
+  stop2();
+  document.getElementById("wrapper2").outerHTML = "";
+
+}
+}
+function stop2(){
+   clearTimeout(animate2);
+}
+ //moved();
+</script>
+
+    </div>
+    <div class="col-md-2">
+<p><br><br></p>
+      <div id="traffic-light2">
+        <div id="goLight2" class="bulb"></div>
+        <div id="slowLight2" class="bulb"></div>
+  <div id="stopLight2" class="bulb"></div>
+  
+</div>
+<script>
+function illuminateRed2() {
+  clearLights2();
+  document.getElementById('stopLight2').style.backgroundColor = "red";
+}
+
+function illuminateYellow2() {
+  clearLights2();
+  document.getElementById('slowLight2').style.backgroundColor = "yellow";
+}
+function illuminateGreen2() {
+  clearLights2();
+  document.getElementById('goLight2').style.backgroundColor = "green";
+}
+
+function clearLights2() {
+  document.getElementById('stopLight2').style.backgroundColor = "black";
+  document.getElementById('slowLight2').style.backgroundColor = "black";
+  document.getElementById('goLight2').style.backgroundColor = "black";
+}
+function change2(light2) {
+  if(light2==1){
+    illuminateRed2();
+  }
+  else if(light2==2){
+    illuminateYellow2();
+  }
+  else if(light2==3){
+    illuminateGreen2();
+  }
+}
+ //change2(3);
+</script>
+    </div>
+        <div class="col-md-2">
+                <p><input type=text  class="form-control" size=5 placeholder="light weighted" name=b1></p>
+                <p><input type=text  class="form-control" size=5 placeholder="medium weighted" name=b2></p>
+                <p><input type=text  class="form-control" size=5 placeholder="heavy weighted" name=b3></p>
+      <span id=result1>?</span>
+
+      <div id="time2" style="  width: 70px;   padding:5px;   border: 5px solid green;  margin: 0;">
+ <font size="20" color="green" face="Trebuchet MS" id="t2"></font>
+</div>
+<script type="text/javascript">
+
+var total_seconds2 = 0 , g2 = 0;
+function CheckTime2(total_seconds2){
+  var s2 = total_seconds2;
+  console.log(s2);
+  if(s2<10)
+  {
+      document.getElementById("t2").innerHTML = '0' + total_seconds2;
+
+  }
+  else{
+      document.getElementById("t2").innerHTML = total_seconds2;
+
+  }
+  if(s2<=0){
+    document.getElementById("t2").innerHTML = "--";
+  }else{
+    s2 = s2 - 1;
+    g2 = parseInt(s2);
+    console.log(s2);
+  setTimeout("CheckTime2(g2)",1000);
+  }
+      }
+
+
+//CheckTime2(10);
+</script>
+</div>
+  </div>
+<!-- <p><br></p>
+ -->
+  <div class="row">
+    <div class="col-md-5">
+<!--        <div style='position:relative' id='wrapper'>
+</div> -->
+<svg width="640" height="150">
+  <rect width="640" height="150" style="fill:rgb(0,0,0);stroke-width:3;stroke:rgb(0,0,0)" />
+      <g fill="none" stroke="white" stroke-width="6">
+    <path stroke-dasharray="15,15" d="M5 70 l630 0" />
+ </g>
+             <foreignobject class="node"  width="630" height="70">
+                       <div style='position:relative' id='wrapper1'></div>
+
+                            </foreignobject>
+
+</svg>
+<script type="text/javascript">
+  //var def = 50;
+  function def1(def){
+    var xmin=1; 
+    var xmax=350;
+    var ymin=5; 
+    var ymax=60;
+    var pointsX = [];
+    var pointsY = [];
+    var str = 'gid=4';
+    for(var i = 0;i<def ;i++)
+    {
+      var xrandom = Math.random() * (+xmax - +xmin) + +xmin;
+      var yrandom = Math.random() * (+ymax - +ymin) + +ymin;
+      str = str +'&'+'x='+ xrandom.toString()+'y='+ yrandom.toString();
+      // pointsX.push(xrandom.toString());
+      // pointsY.push(yrandom.toString());
+      // console.log(pointsX);
+      // console.log(pointsY);
+    }
+     // var str = 'gid=4&x=20y=30&x=40y=50&x=100y=100&x=200y=200&x=300y=300&x=240y=240';
+    var data = str.match(/(x|y)=(\d+)/g), pointsX = [], pointsY = [];
+    for(var i = 0; i < data.length; i++)
+    {
+        var tmp = data[i].split('=');
+        if (tmp[0] == 'x')
+            pointsX.push(tmp[1]);
+        else
+            pointsY.push(tmp[1]);
+    }
+    for(var i = 0; i < pointsX.length; i++)
+    {
+        var div = document.createElement('div');
+        div.className = 'dot';
+        div.style.left = pointsX[i] + 'px';
+        div.style.top = pointsY[i] + 'px';
+        document.getElementById('wrapper1').appendChild(div);
+    }    
+  }
+
+  //def1(5);
+  var imageOffset1 = 0;
+  function mover()
+  {
+  if(imageOffset1<=550){
+  imageOffset1 += 1
+  document.getElementById("wrapper1").style.left = imageOffset1 + "px";
+  animate1 = setTimeout(function(){mover();},50);
+}
+else
+{
+  stop1();
+  document.getElementById("wrapper1").outerHTML = "";
+}
+}
+function stop1(){
+   clearTimeout(animate1);
+}
+//mover();
+</script>
+    </div>
+    <div class="col-md-2">
+<svg width="260" height="150">
+  <rect width="260" height="150" style="fill:rgb(0,0,0);stroke-width:3;stroke:rgb(0,0,0)" />
+    <line stroke-dasharray="15, 15" x1="150" y1="70" x2="250" y2="70" style="stroke-width: 6px;"></line>
+</svg>
+    </div>
+    <div class="col-md-5">
+<svg width="610" height="150">
+  <rect width="610" height="150" style="fill:rgb(0,0,0);stroke-width:3;stroke:rgb(0,0,0)" />
+  <line stroke-dasharray="15, 15" x1="10" y1="70" x2="600" y2="70" style="stroke-width: 6px;"></line>
+<!--       <g fill="none" stroke="white" stroke-width="6">
+    <path stroke-dasharray="15,15" d="M5 70 l450 0" /> -->
+    <foreignobject class="node"  width="610" height="150">
+                       <div style='position:relative' id='wrapper3'></div>
+                     </foreignobject>
+ </g>
+ 
+</svg>
+
+<script type="text/javascript">
+  //var def = 50;
+  function def3(def){
+    var xmin=1; 
+    var xmax=350;
+    var ymin=80; 
+    var ymax=140;
+    var pointsX = [];
+    var pointsY = [];
+    var str = 'gid=4';
+    for(var i = 0;i<def ;i++)
+    {
+      var xrandom = Math.random() * (+xmax - +xmin) + +xmin;
+      var yrandom = Math.random() * (+ymax - +ymin) + +ymin;
+      str = str +'&'+'x='+ xrandom.toString()+'y='+ yrandom.toString();
+      // pointsX.push(xrandom.toString());
+      // pointsY.push(yrandom.toString());
+      // console.log(pointsX);
+      // console.log(pointsY);
+
+    }
+     // var str = 'gid=4&x=20y=30&x=40y=50&x=100y=100&x=200y=200&x=300y=300&x=240y=240';
+    var data = str.match(/(x|y)=(\d+)/g), pointsX = [], pointsY = [];
+    for(var i = 0; i < data.length; i++)
+    {
+        var tmp = data[i].split('=');
+        if (tmp[0] == 'x')
+            pointsX.push(tmp[1]);
+        else
+            pointsY.push(tmp[1]);
+    }
+    for(var i = 0; i < pointsX.length; i++)
+    {
+        var div = document.createElement('div');
+        div.className = 'dot';
+        div.style.left = pointsX[i] + 'px';
+        div.style.top = pointsY[i] + 'px';
+        document.getElementById('wrapper3').appendChild(div);
+    }    
+  }
+
+ // def3(5);
+  var imageOffset3 = 0;
+  function movel()
+  {
+    if(imageOffset3<=550){
+  imageOffset3 += 1
+  document.getElementById("wrapper3").style.right = imageOffset3 + "px";
+  animate4 = setTimeout(function(){movel();},50);
+}
+else
+{
+  stop3();
+  document.getElementById("wrapper3").outerHTML = "";
+
+}
+}
+function stop3(){
+   clearTimeout(animate3);
+}
+ //movel();
+</script>
+    </div>
+  </div>
+
+<!-- <p><br></p>
+ -->
+
+  <div class="row">
+    <div class="col-md-1"></div>
+    <div class="col-md-3">
+      <p><br></p>
+
+            <p><input type=text  class="form-control" size=5 name=d1 placeholder="light weighted" style="width:230px;"></p>
+            <p><input type=text  class="form-control" size=5 name=d2 placeholder="medium weighted" style="width:230px;"></p>
+            <p><input type=text  class="form-control" size=5 name=d3 placeholder="heavy weighted" style="width:230px;"></p>
+      <span id=result3>?</span>
+       <div id="time4" style="  width: 70px;   padding:5px;   border: 5px solid green;  margin: 0;">
+ <font size="20" color="green" face="Trebuchet MS" id="t4"></font>
+</div>
+<script type="text/javascript">
+
+var total_seconds4 = 0 , g4 = 0;
+function CheckTime4(total_seconds4){
+  var s4 = total_seconds4;
+  console.log(s4);
+  if(s4<10)
+  {
+      document.getElementById("t4").innerHTML = '0' + total_seconds4;
+
+  }
+  else{
+      document.getElementById("t4").innerHTML = total_seconds4;
+
+  }
+  if(s4<=0){
+    document.getElementById("t4").innerHTML = "--";
+  }else{
+    s4 = s4 - 1;
+    g4 = parseInt(s4);
+    console.log(s4);
+  setTimeout("CheckTime4(g4)",1000);
+  }
+      }
+
+
+//CheckTime4(10);
+</script>
+
+</div>
+
+
+    <div class="col-md-1">
+<!-- <p><br></p>
+ -->
+      <div id="traffic-light4">
+  <div id="stopLight4" class="bulb"></div>
+  <div id="slowLight4" class="bulb"></div>
+  <div id="goLight4" class="bulb"></div>
+
+</div>
+<script>
+function illuminateRed4() {
+  clearLights4();
+  document.getElementById('stopLight4').style.backgroundColor = "red";
+}
+
+function illuminateYellow4() {
+  clearLights4();
+  document.getElementById('slowLight4').style.backgroundColor = "yellow";
+}
+function illuminateGreen4() {
+  clearLights4();
+  document.getElementById('goLight4').style.backgroundColor = "green";
+}
+
+function clearLights4() {
+  document.getElementById('stopLight4').style.backgroundColor = "black";
+  document.getElementById('slowLight4').style.backgroundColor = "black";
+  document.getElementById('goLight4').style.backgroundColor = "black";
+}
+function change4(light4) {
+  if(light4==1){
+    illuminateRed4();
+  }
+  else if(light4==2){
+    illuminateYellow4();
+  }
+  else if(light4==3){
+    illuminateGreen4();
+  }
+}
+ //change4(3);
+</script>
+
+ 
+
+
+
+    </div>
+
+    <div class="col-md-2">
+<svg width="150" height="245">
+  <rect width="150" height="245" style="fill:rgb(0,0,0);stroke-width:3;stroke:rgb(0,0,0)" />
+            <line stroke-dasharray="15, 15" x1="73" y1="240" x2="73" y2="10" style="stroke-width: 6px;"></line>
+            <foreignobject class="node"  width="150" height="245">
+                       <div style='position:relative' id='wrapper4'></div>
+
+                            </foreignobject>
+
+</svg>
+
+
+
+<script type="text/javascript">
+  //var def = 50;
+  function def4(def){
+    var xmin=10; 
+    var xmax=80;
+    var ymin=0; 
+    var ymax=225;
+    var pointsX = [];
+    var pointsY = [];
+    var str = 'gid=4';
+    for(var i = 0;i<def ;i++)
+    {
+      var xrandom = Math.random() * (+xmax - +xmin) + +xmin;
+      var yrandom = Math.random() * (+ymax - +ymin) + +ymin;
+      str = str +'&'+'x='+ xrandom.toString()+'y='+ yrandom.toString();
+      // pointsX.push(xrandom.toString());
+      // pointsY.push(yrandom.toString());
+      // console.log(pointsX);
+      // console.log(pointsY);
+
+    }
+     // var str = 'gid=4&x=20y=30&x=40y=50&x=100y=100&x=200y=200&x=300y=300&x=240y=240';
+    var data = str.match(/(x|y)=(\d+)/g), pointsX = [], pointsY = [];
+    for(var i = 0; i < data.length; i++)
+    {
+        var tmp = data[i].split('=');
+        if (tmp[0] == 'x')
+            pointsX.push(tmp[1]);
+        else
+            pointsY.push(tmp[1]);
+    }
+    for(var i = 0; i < pointsX.length; i++)
+    {
+        var div = document.createElement('div');
+        div.className = 'dot';
+        div.style.left = pointsX[i] + 'px';
+        div.style.top = pointsY[i] + 'px';
+        document.getElementById('wrapper4').appendChild(div);
+    }    
+  }
+
+ //def4(5);
+  var imageOffset4 = 0;
+  function moveu()
+  {
+    if(imageOffset4<=550){
+  imageOffset4 += 1
+  document.getElementById("wrapper4").style.bottom = imageOffset4 + "px";
+  animate4 = setTimeout(function(){moveu();},50);
+}
+else
+{
+  stop4();
+  document.getElementById("wrapper4").outerHTML = "";
+
+}
+}
+function stop4(){
+   clearTimeout(animate4);
+}
+ //moveu();
+</script>
+<p><br></p>
+ <button type="button" class="btn btn-primary"><a href=# id=calculate>SUBMIT</a></button>
+
+    </div>
+    <div class="col-md-2">
+<!-- <p><br></p>
+ -->
+    <div id="traffic-light3">
+<div class="row">
+    <div class="col-md-4">
+      <div id="stopLight3" class="bulb1"></div>
+    </div>
+    <div class="col-md-4">
+      <div id="slowLight3" class="bulb1"></div>
+    </div>
+    <div class="col-md-4">
+      <div id="goLight3" class="bulb1"></div>
+    </div>
+  </div>
+
+</div>
+<script>
+
+function illuminateRed3() {
+  clearLights3();
+  document.getElementById('stopLight3').style.backgroundColor = "red";
+}
+
+function illuminateYellow3() {
+  clearLights3();
+  document.getElementById('slowLight3').style.backgroundColor = "yellow";
+}
+function illuminateGreen3() {
+  clearLights3();
+  document.getElementById('goLight3').style.backgroundColor = "green";
+}
+
+function clearLights3() {
+  document.getElementById('stopLight3').style.backgroundColor = "black";
+  document.getElementById('slowLight3').style.backgroundColor = "black";
+  document.getElementById('goLight3').style.backgroundColor = "black";
+}
+function change3(light3) {
+  if(light3==1){
+    illuminateRed3();
+  }
+  else if(light3==2){
+    illuminateYellow3();
+  }
+  else if(light3==3){
+    illuminateGreen3();
+  }
+}
+// change3(3);
+</script>
+    </div>
+        <div class="col-md-2">
+          <p><br></p>
+
+              <p><input type=text   class="form-control" size=5 placeholder="light weighted" name=c1></p>
+              <p><input type=text   class="form-control" size=5  placeholder="medium weighted" name=c2></p>
+              <p><input type=text   class="form-control" size=5 placeholder="heavy weighted" name=c3></p>
+    <span id=result2>?</span>
+          <div id="time3" style="  width: 70px;   padding:5px;   border: 5px solid green;  margin: 0;">
+ <font size="20" color="green" face="Trebuchet MS" id="t3"></font>
+</div>
+<script type="text/javascript">
+
+var total_seconds3 = 0 , g3 = 0;
+function CheckTime3(total_seconds3){
+  var s3 = total_seconds3;
+  console.log(s3);
+  if(s3<10)
+  {
+      document.getElementById("t3").innerHTML = '0' + total_seconds3;
+
+  }
+  else{
+      document.getElementById("t3").innerHTML = total_seconds3;
+
+  }
+  if(s3<=0){
+    document.getElementById("t3").innerHTML = "--";
+  }else{
+    s3 = s3 - 1;
+    g3 = parseInt(s3);
+    console.log(s3);
+  setTimeout("CheckTime3(g3)",1000);
+  }
+      }
+
+
+//CheckTime3(10);
+</script>
+        </div>
+
+  </div>
+</div>
+<!-- <span id=result4>?</span>
+<span id=result5>?</span>
+<span id=result6>?</span>
+<span id=result7>?</span>
+<span id=result8>?</span>
+<span id=result9>?</span>
+<span id=result10>?</span>
+<span id=result11>?</span> -->
+            <p><input type=text class="form-control" size=5 name=e id="extra" hidden="True" value="0"></p>
+            <span id=result12>?</span>
+
+<!-- <button type="button" class="btn btn-primary"><a href=# id=calculate>SUBMIT</a></button>
+ -->
+</body>
+
+
+
+
+
+
+
+

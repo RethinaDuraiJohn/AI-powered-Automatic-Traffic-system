@@ -1,0 +1,57 @@
+video {
+  width: 100%;
+  height: auto;
+}
+
+
+#hi {
+  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-weight: 200;
+  font-size: 2em;
+  background-color: #eafeea;
+  border: 0;
+  margin: 0;
+}
+
+
+#hi{
+  background: rgb(31, 30, 30);
+  
+/*  width: 31px;
+*/  height: 130px;
+  box-shadow: 0 0 15px rgba(0,0,2, .9);
+  margin: auto;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.spacer{
+  padding: 2px;
+}
+
+.light{
+  border-radius: 100%;
+  width: 40px;
+  height: 35px;	
+  opacity: 0.3;
+  padding: 10px;
+  border: 2px inset white;
+  margin: auto;
+  box-shadow: 0 0 5px rgba(255,255,255, 1);
+}
+
+/*#red{
+    background-color: red;
+}
+
+#yellow{
+    background-color: #e6e600;
+}
+
+#green{
+  background-color: #27e833;
+}
+*/
+.light-visible {
+  opacity: 1;
+}

@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+	<style type="text/css">
+		body{
+background:white;
+}
+#plane {
+    height: 50px;
+    position:absolute;
+    top:40%;
+    left:40%;
+}
+	</style>
+</head>
+<body>
+
+
+<img id="plane" src='https://library.kissclipart.com/20180901/fxw/kissclipart-toy-car-png-cartoon-clipart-car-renault-d527f8f04a3f6596.jpg' border='0'/>
+
+<script type="text/javascript">
+	setInterval(movePlane, 20);
+var keys = {}
+
+$(document).keydown(function(e) {
+    keys[e.keyCode] = true;
+});
+
+$(document).keyup(function(e) {
+    delete keys[e.keyCode];
+});
+
+
+function movePlane() {
+    for (var direction in keys) {
+        if (!keys.hasOwnProperty(direction)) continue;
+        if (direction == 37) {
+            $("#plane").animate({left: "-=5"}, 0);                
+        }
+        if (direction == 38) {
+            $("#plane").animate({top: "-=5"}, 0);  
+        }
+        if (direction == 39) {
+            $("#plane").animate({left: "+=5"}, 0);  
+        }
+        if (direction == 40) {
+            $("#plane").animate({top: "+=5"}, 0);  
+        }
+    }
+}
+
+</script>
+
+</body>
+</html>
